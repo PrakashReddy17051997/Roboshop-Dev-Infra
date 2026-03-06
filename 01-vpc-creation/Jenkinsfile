@@ -8,6 +8,7 @@ pipeline {
     options {
         timeout(time: 1, unit:'HOURS')
         disableConcurrentBuilds()
+        ansiColor('xterm')
     }
     stages {
         stage('terraform init') {
@@ -35,6 +36,18 @@ pipeline {
                 sh """
                     cd 01-vpc-creation
                     terraform apply -auto-approve
+                    """
+            }
+        }
+        stage('Destory') {
+            input {
+                message "Should we continue Infra Destroy?"
+                ok "Yes, we should"
+            }
+            steps {
+                sh """
+                    cd 01-vpc-creation
+                    terraform destroy -auto-approve
                     """
             }
         }
