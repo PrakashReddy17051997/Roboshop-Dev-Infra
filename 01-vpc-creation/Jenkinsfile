@@ -10,6 +10,9 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
+    parameters{
+        choice(name: 'action', choices: ['apply', 'destroy'], description: 'Pick your choice')
+    }
     stages {
         stage('terraform init') {
             steps {
@@ -28,10 +31,15 @@ pipeline {
             }
         }
         stage('Apply') {
-            input {
-                message "Should we continue Infra Creation?"
-                ok "Yes, we should"
+            when {
+                expression{
+                    params.actions == 'apply'
+                }
             }
+            // input {
+            //     message "Should we continue Infra Creation?"
+            //     ok "Yes, we should"
+            // }
             steps {
                 sh """
                     cd 01-vpc-creation
@@ -40,10 +48,15 @@ pipeline {
             }
         }
         stage('Destory') {
-            input {
-                message "Should we continue Infra Destroy?"
-                ok "Yes, we should"
+            when {
+                expression{
+                    params.actions == 'destroy'
+                }
             }
+            // input {
+            //     message "Should we continue Infra Destroy?"
+            //     ok "Yes, we should"
+            // }
             steps {
                 sh """
                     cd 01-vpc-creation
