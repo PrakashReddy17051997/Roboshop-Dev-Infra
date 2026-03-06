@@ -33,7 +33,7 @@ pipeline {
         stage('Apply') {
             when {
                 expression{
-                    params.actions == 'apply'
+                    params.action == 'apply'
                 }
             }
             // input {
@@ -50,7 +50,7 @@ pipeline {
         stage('Destory') {
             when {
                 expression{
-                    params.actions == 'destroy'
+                    params.action == 'destroy'
                 }
             }
             // input {
