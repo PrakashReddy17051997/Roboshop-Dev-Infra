@@ -1,0 +1,20 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+
+  }
+  backend "s3" {
+    bucket       = "learndevopswithprakash.online-dev-infra"
+    key          = "dev/roboshop_payment"
+    region       = "us-east-1"
+    use_lockfile = true
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+}
