@@ -7,7 +7,7 @@ terraform {
 
   }
   backend "s3" {
-    bucket       = "learndevopswithprakash.online-dev-infra"
+    bucket       = "learndevopswithprakash.online-infra-state-dev"
     key          = "dev/roboshop_databases_ec2"
     region       = "us-east-1"
     use_lockfile = true
