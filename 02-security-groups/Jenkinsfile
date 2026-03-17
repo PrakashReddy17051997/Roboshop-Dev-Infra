@@ -45,10 +45,12 @@ pipeline {
                     cd 02-security-groups
                     terraform apply -auto-approve
                     """
-                    def params = [
-                        string(name: 'apply', value: "apply")
-                        ]
-                    build job: "03-VPN-setup", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'apply', value: "apply")
+                            ]
+                        build job: "03-VPN-setup", wait: true, parameters: params
+                        }
             }
         }
         stage('Destory') {
@@ -66,10 +68,12 @@ pipeline {
                     cd 02-security-groups
                     terraform destroy -auto-approve
                     """
-                    def params = [
-                        string(name: 'destory', value: "destroy")
-                        ]
-                    build job: "01-vpc-creation", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'destory', value: "destroy")
+                            ]
+                        build job: "01-vpc-creation", wait: true, parameters: params
+                        }
             }
         }
         
