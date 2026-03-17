@@ -45,10 +45,12 @@ pipeline {
                     cd 03-VPN-setup
                     terraform apply -auto-approve
                     """
-                    def params = [
-                        string(name: 'apply', value: "apply")
-                        ]
-                    build job: "04-databases", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'apply', value: "apply")
+                            ]
+                        build job: "04-databases", wait: true, parameters: params
+            }
             }
             }
         }
@@ -67,10 +69,12 @@ pipeline {
                     cd 03-VPN-setup
                     terraform destroy -auto-approve
                     """
-                    def params = [
-                        string(name: 'destroy', value: "destroy")
-                        ]
-                    build job: "02-security-groups", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'destroy', value: "destroy")
+                            ]
+                        build job: "02-security-groups", wait: true, parameters: params
+                    }
             }
         }
         

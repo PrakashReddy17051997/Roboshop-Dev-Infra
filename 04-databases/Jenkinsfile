@@ -45,10 +45,12 @@ pipeline {
                     cd 04-databases
                     terraform apply -auto-approve
                     """
-                    def params = [
-                        string(name: 'apply', value: "apply")
-                        ]
-                    build job: "05-App-alb", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'apply', value: "apply")
+                            ]
+                        build job: "05-App-alb", wait: true, parameters: params
+            }
             }
         }
         stage('Destory') {
@@ -66,10 +68,12 @@ pipeline {
                     cd 04-databases
                     terraform destroy -auto-approve
                     """
-                    def params = [
-                        string(name: 'destroy', value: "destroy")
-                        ]
-                    build job: "03-VPN-setup", wait: true, parameters: params
+                    script{
+                        def params = [
+                            string(name: 'destroy', value: "destroy")
+                            ]
+                        build job: "03-VPN-setup", wait: true, parameters: params
+            }
             }
         }
         
