@@ -58,7 +58,7 @@ pipeline {
                 stage('Automatic Load BAlancer') {
                     steps {
                         sh """
-                            cd 05-APP-alb
+                            cd 05-App-alb
                             terraform init -reconfigure
                             terraform plan
                             terraform apply -auto-approve
