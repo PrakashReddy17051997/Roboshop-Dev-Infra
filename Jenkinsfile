@@ -67,7 +67,7 @@ pipeline {
             }
         }
         
-    }
+    
     // post build
     post {
         always{
@@ -80,5 +80,4 @@ pipeline {
             echo 'Confragulations on success build'
         }
     }
-}
 }
